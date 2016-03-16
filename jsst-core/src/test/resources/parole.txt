@@ -1,0 +1,41 @@
+ao	test	number	gender
+aq	test	none	gender	number	function
+cc
+cs
+da	test	none	gender	number
+dd	coment	none	gender	number	
+de	test	none	gender	number
+di	test	none	gender	number
+dn	test	none	gender	number
+dp	test	person	gender	number	pos
+fa
+fc
+fd
+fe
+fg
+fi
+fp
+fl
+fs
+fx
+fz
+i
+nc	test	gender	number
+np
+p0	test	person	gender	number
+pd	test	none	gender	number
+pi	test	none	gender	number
+pn	test	none	gender	number
+pp	test	person	gender	number	cas	none	pol
+pr	test	none	gender	number
+pt	test	none	gender	number
+px	test	person	gender	number	none	pos
+sp	test	spfor	gender	number
+va	test	mod	tense	person	number
+vm	test	mod	tense	person	number
+vs	test	mod	tense	person	number
+w
+z
+zm
+zp
+zu
