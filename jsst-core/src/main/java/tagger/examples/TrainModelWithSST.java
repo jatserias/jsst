@@ -5,6 +5,7 @@ package tagger.examples;
 import org.apache.log4j.Logger;
 
 import com.martiansoftware.jsap.JSAP;
+import com.martiansoftware.jsap.JSAPException;
 
 import tagger.core.SttTagger;
 import tagger.data.SstTagSet;
@@ -27,24 +28,26 @@ public class TrainModelWithSST {
 	private static final String encoding = "UTF-8";
 	
 	
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 	 
+	
+		com.martiansoftware.jsap.SimpleJSAP jsap;
+		try {
+			jsap = new com.martiansoftware.jsap.SimpleJSAP( TrainModelWithSST.class.getName(), 
+					"SST Training",
+					new com.martiansoftware.jsap.Parameter[] {
+							new com.martiansoftware.jsap.UnflaggedOption( "tagset", JSAP.STRING_PARSER, JSAP.NO_DEFAULT, JSAP.REQUIRED, JSAP.NOT_GREEDY, "tagset" ),
+							new com.martiansoftware.jsap.UnflaggedOption( "modelname", JSAP.STRING_PARSER, JSAP.NO_DEFAULT, JSAP.REQUIRED, JSAP.NOT_GREEDY, "Resulting Model Name" ),
+							new com.martiansoftware.jsap.UnflaggedOption( "corpus", JSAP.STRING_PARSER, JSAP.NO_DEFAULT, JSAP.REQUIRED, JSAP.NOT_GREEDY, "Training Data" ),		
+							new com.martiansoftware.jsap.UnflaggedOption( "epochs", JSAP.INTEGER_PARSER, "14", JSAP.NOT_REQUIRED, JSAP.NOT_GREEDY, "Number of epoch (iterations)" ),		
+							new com.martiansoftware.jsap.Switch("bio", 'b', "bio", "BIO Format" ),
+							new com.martiansoftware.jsap.Switch("ergodic", 'e', "ergodic", "Filter punctuation" ),
+							new com.martiansoftware.jsap.Switch("secondorder", 's', "secondorder", "Generate second order features" ),
+							new com.martiansoftware.jsap.Switch("unk", 'u', "unk", "Use UNK label" ),
+							new com.martiansoftware.jsap.Switch("mem", 'm', "mem", "Load the whole training in memory" ),
+						}		
+					);
 		
-		
-		final com.martiansoftware.jsap.SimpleJSAP jsap = new com.martiansoftware.jsap.SimpleJSAP( TrainModelWithSST.class.getName(), 
-				"SST Training",
-				new com.martiansoftware.jsap.Parameter[] {
-						new com.martiansoftware.jsap.UnflaggedOption( "tagset", JSAP.STRING_PARSER, JSAP.NO_DEFAULT, JSAP.REQUIRED, JSAP.NOT_GREEDY, "tagset" ),
-						new com.martiansoftware.jsap.UnflaggedOption( "modelname", JSAP.STRING_PARSER, JSAP.NO_DEFAULT, JSAP.REQUIRED, JSAP.NOT_GREEDY, "Resulting Model Name" ),
-						new com.martiansoftware.jsap.UnflaggedOption( "corpus", JSAP.STRING_PARSER, JSAP.NO_DEFAULT, JSAP.REQUIRED, JSAP.NOT_GREEDY, "Training Data" ),		
-						new com.martiansoftware.jsap.UnflaggedOption( "epochs", JSAP.INTEGER_PARSER, "14", JSAP.NOT_REQUIRED, JSAP.NOT_GREEDY, "Number of epoch (iterations)" ),		
-						new com.martiansoftware.jsap.Switch("bio", 'b', "bio", "BIO Format" ),
-						new com.martiansoftware.jsap.Switch("ergodic", 'e', "ergodic", "Filter punctuation" ),
-						new com.martiansoftware.jsap.Switch("secondorder", 's', "secondorder", "Generate second order features" ),
-						new com.martiansoftware.jsap.Switch("unk", 'u', "unk", "Use UNK label" ),
-						new com.martiansoftware.jsap.Switch("mem", 'm', "mem", "Load the whole training in memory" ),
-					}		
-				);
 		
 		final com.martiansoftware.jsap.JSAPResult jsapResult = jsap.parse( args );
 		if ( jsap.messagePrinted() ) return;
@@ -105,11 +108,10 @@ public class TrainModelWithSST {
 	   System.err.println("Features loaded: "+fe.size()+ " "+fe.esize());
 	   System.err.println("Features loaded tagger: "+learnTagger.fe.esize());
 	  
-	   fe.dump();
-	   
+	   //fe.dump();	   
 	   learnTagger.train(TD,T,modelname, fe);
-	   fe.dump();
-	  
+	   //fe.dump();
+	  System.err.println("Training done in  "+(System.currentTimeMillis()-tStart));
 	  logger.info("Training done in  "+(System.currentTimeMillis()-tStart));
 	  
 	 
@@ -122,6 +124,14 @@ public class TrainModelWithSST {
 	  
 	  learnTaggerd.train_light_online(modelname+"ONLINE", featfile, encoding, secondorder, T);
 	  **/
+	
+	} catch (JSAPException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
+}
 	
 }

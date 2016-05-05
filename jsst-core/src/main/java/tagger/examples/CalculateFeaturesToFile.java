@@ -52,7 +52,7 @@ public class CalculateFeaturesToFile {
 	 */
 	public static void main(String args[]) throws Exception {
 
-		final com.martiansoftware.jsap.SimpleJSAP jsap = new com.martiansoftware.jsap.SimpleJSAP( TrainModelWithSST.class.getName(), 
+		final com.martiansoftware.jsap.SimpleJSAP jsap = new com.martiansoftware.jsap.SimpleJSAP( CalculateFeaturesToFile.class.getName(), 
 				"SST Calculate Features",
 				new com.martiansoftware.jsap.Parameter[] {
 			new com.martiansoftware.jsap.UnflaggedOption( "tagset", JSAP.STRING_PARSER, JSAP.NO_DEFAULT, JSAP.REQUIRED, JSAP.NOT_GREEDY, "tagset" ),

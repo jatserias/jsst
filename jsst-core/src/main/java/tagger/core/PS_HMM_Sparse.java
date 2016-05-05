@@ -393,8 +393,8 @@ public class PS_HMM_Sparse extends ChainSparse {
 			 e.dump(sw);
 			 logger.error(sw);
 			 logger.error(e1);
-			 System.exit(-1);
-			 return false;
+			 throw e1;
+			 //return false;
 		 }
 		}
 	 

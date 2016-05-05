@@ -122,7 +122,7 @@ public class TrainingDataSSTMixedonline extends  TrainingDataSSTonline{
 		}catch(Exception xe){
 			logger.error("Something got wrong accessing example: "+i+" pos:"+ni +" in file "+nf);
 			logger.error(xe);		
-			System.exit(-1);
+			throw xe;
 		}
 		try{
 		String buff = mrf[nf].readLine();
@@ -130,7 +130,7 @@ public class TrainingDataSSTMixedonline extends  TrainingDataSSTonline{
 	    }catch(Exception x) {
 	    	logger.error("Something got wrong reading example: "+i+" pos:"+ni +" in file "+nf);
 	    	logger.error(x);		
-			System.exit(-1);
+	    	throw x;
 	    }
 	    
 		return e;
